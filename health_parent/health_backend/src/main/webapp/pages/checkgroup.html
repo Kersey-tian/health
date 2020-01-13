@@ -55,7 +55,7 @@
                 <div class="box">
                     <div class="filter-container">
                         <el-input placeholder="编码/名称/助记码" v-model="pagination.queryString" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter"></el-input>
-                        <el-button @click="findPage()" class="dalfBut">查询</el-button>
+                        <el-button @click="findCondition()" class="dalfBut">查询</el-button>
                         <el-button type="primary" class="butT" @click="handleCreate()">新建</el-button>
                     </div>
                     <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
@@ -319,9 +319,9 @@
                 //分页查询
                 findPage() {
                     var param = {
-                      currentPage: this.pagination.currentPage,
-                      pageSize: this.pagination.pageSize,
-                      queryString: this.pagination.queryString
+                        currentPage: this.pagination.currentPage,
+                        pageSize: this.pagination.pageSize,
+                        queryString: this.pagination.queryString
                     };
                     var _this = this;
                     axios.post('/checkgroup/findPage.action',param)
@@ -329,6 +329,11 @@
                         _this.dataList = res.data.rows,
                         _this.pagination.total = res.data.total
                     });
+                },
+                //条件查询
+                findCondition(){
+                    this.pagination.currentPage = 1;
+                    this.findPage();
                 },
                 // 重置表单
                 resetForm() {
