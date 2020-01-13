@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itheima.dao.CheckGroupDao">
+    <insert id="add" parameterType="com.itheima.pojo.CheckGroup">
+        <!--selectKey是与insert紧密相关的查询语句，
+        一般在插入后获取主键返回给指定keyProperty-->
+        <selectKey resultType="integer" keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into
+            t_checkgroup
+        values
+            (null,#{code},#{name},#{helpCode},#{sex},#{remark},#{attention})
+    </insert>
+    <insert id="setCheckGroupAndCheckItem" parameterType="map">
+        insert into t_checkgroup_checkitem values (#{checkgroupid},#{checkitemid})
+    </insert>
+
+    <select id="findAll" parameterType="string" resultType="com.itheima.pojo.CheckGroup">
+        select * from t_checkgroup
+        <if test="value != null and value.length > 0">
+            where code like "%"#{value}"%" or name like "%"#{value}"%" or helpCode like "%"#{value}"%"
+        </if>
+    </select>
+
+    <select id="findById" parameterType="integer" resultType="com.itheima.pojo.CheckGroup">
+        select * from t_checkgroup where id = #{id}
+    </select>
+
+    <select id="findCheckItemIdsByCheckGroupId" parameterType="int" resultType="java.lang.Integer">
+        select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{id}
+    </select>
+
+    <update id="update" parameterType="com.itheima.pojo.CheckGroup">
+        update t_checkgroup
+        <set>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="helpCode != null">
+                helpCode = #{helpCode},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="attention != null">
+                attention = #{attention},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteForItemAndGroup" parameterType="int">
+        delete from t_checkgroup_checkitem where checkgroup_id = #{checkgroup_id}
+    </delete>
+
+    <delete id="deleteForGroup" parameterType="int">
+        delete from t_checkgroup where id = #{id}
+    </delete>
+
+</mapper>
