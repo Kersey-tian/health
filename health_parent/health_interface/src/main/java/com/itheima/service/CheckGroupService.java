@@ -10,7 +10,7 @@ public interface CheckGroupService {
     void add(CheckGroup checkGroup,Integer[] checkitemIds);
     void setCheckGroupAndCheckItem(Integer checkGroupId,Integer[] checkitemIds);
 
-    PageResult findAll(QueryPageBean queryPageBean);
+    PageResult findPage(QueryPageBean queryPageBean);
 
     CheckGroup findById(Integer id);
 
@@ -19,4 +19,6 @@ public interface CheckGroupService {
     void update(CheckGroup checkGroup, Integer[] checkitemIds);
 
     void delete(Integer id);
+
+    List<CheckGroup> findAll();
 }

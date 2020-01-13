@@ -54,9 +54,9 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     }
 
     @Override
-    public PageResult findAll(QueryPageBean queryPageBean) {
+    public PageResult findPage(QueryPageBean queryPageBean) {
         PageHelper.startPage(queryPageBean.getCurrentPage(),queryPageBean.getPageSize());
-        Page<CheckGroup> page = checkGroupDao.findAll(queryPageBean.getQueryString());
+        Page<CheckGroup> page = checkGroupDao.findPage(queryPageBean.getQueryString());
         PageResult result = new PageResult(page.getTotal(),page.getResult());
         return result;
     }
@@ -88,5 +88,10 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     public void delete(Integer id) {
         checkGroupDao.deleteForItemAndGroup(id);
         checkGroupDao.deleteForGroup(id);
+    }
+
+    @Override
+    public List<CheckGroup> findAll() {
+        return checkGroupDao.findAll();
     }
 }

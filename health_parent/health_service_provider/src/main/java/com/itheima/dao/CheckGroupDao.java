@@ -12,7 +12,7 @@ public interface CheckGroupDao {
 
     void setCheckGroupAndCheckItem(Map map);
 
-    Page<CheckGroup> findAll(String queryString);
+    Page<CheckGroup> findPage(String queryString);
 
     CheckGroup findById(Integer id);
 
@@ -23,4 +23,6 @@ public interface CheckGroupDao {
     void deleteForItemAndGroup(Integer id);
 
     void deleteForGroup(Integer id);
+
+    List<CheckGroup> findAll();
 }

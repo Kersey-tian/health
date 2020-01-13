@@ -17,7 +17,7 @@
         insert into t_checkgroup_checkitem values (#{checkgroupid},#{checkitemid})
     </insert>
 
-    <select id="findAll" parameterType="string" resultType="com.itheima.pojo.CheckGroup">
+    <select id="findPage" parameterType="string" resultType="com.itheima.pojo.CheckGroup">
         select * from t_checkgroup
         <if test="value != null and value.length > 0">
             where code like "%"#{value}"%" or name like "%"#{value}"%" or helpCode like "%"#{value}"%"
@@ -65,4 +65,7 @@
         delete from t_checkgroup where id = #{id}
     </delete>
 
+    <select id="findAll" resultType="com.itheima.pojo.CheckGroup">
+        select * from t_checkgroup
+    </select>
 </mapper>

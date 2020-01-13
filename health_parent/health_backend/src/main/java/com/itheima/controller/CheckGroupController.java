@@ -7,13 +7,11 @@ import com.itheima.entity.QueryPageBean;
 import com.itheima.entity.Result;
 import com.itheima.pojo.CheckGroup;
 import com.itheima.service.CheckGroupService;
-import org.apache.zookeeper.Op;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.PrimitiveIterator;
 
 @RestController
 @RequestMapping("/checkgroup")
@@ -35,7 +33,7 @@ public class CheckGroupController {
 
     @RequestMapping("/findPage")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
-       return checkGroupService.findAll(queryPageBean);
+       return checkGroupService.findPage(queryPageBean);
     }
 
     @RequestMapping("/findById")
@@ -82,5 +80,17 @@ public class CheckGroupController {
             return new Result(false,MessageConstant.DELETE_CHECKGROUP_FAIL);
         }
         return new Result(true,MessageConstant.DELETE_CHECKGROUP_SUCCESS);
+    }
+
+    @RequestMapping("/findAll")
+    public Result findAll(){
+        try {
+            List<CheckGroup> checkGroups = checkGroupService.findAll();
+            return new Result(true,MessageConstant.QUERY_CHECKGROUP_SUCCESS,checkGroups);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+
     }
 }
