@@ -73,7 +73,6 @@ public class CheckGroupServiceImpl implements CheckGroupService {
 
     @Override
     public void update(CheckGroup checkGroup, Integer[] checkitemIds) {
-        checkGroupDao.update(checkGroup);
         Integer id = checkGroup.getId();
         checkGroupDao.deleteForItemAndGroup(id);
         for (Integer checkitemId : checkitemIds) {
@@ -82,6 +81,7 @@ public class CheckGroupServiceImpl implements CheckGroupService {
             map.put("checkitem_id",checkitemId);
             checkGroupDao.setCheckGroupAndCheckItem(map);
         }
+        checkGroupDao.update(checkGroup);
     }
 
     @Override

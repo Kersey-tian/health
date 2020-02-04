@@ -13,8 +13,8 @@
         values
             (null,#{code},#{name},#{helpCode},#{sex},#{remark},#{attention})
     </insert>
-    <insert id="setCheckGroupAndCheckItem" parameterType="map">
-        insert into t_checkgroup_checkitem values (#{checkgroupid},#{checkitemid})
+    <insert id="setCheckGroupAndCheckItem" parameterType="hashmap">
+        insert into t_checkgroup_checkitem values (#{checkgroup_id},#{checkitem_id})
     </insert>
 
     <select id="findPage" parameterType="string" resultType="com.itheima.pojo.CheckGroup">
@@ -67,5 +67,28 @@
 
     <select id="findAll" resultType="com.itheima.pojo.CheckGroup">
         select * from t_checkgroup
+    </select>
+
+    <resultMap id="baseResultMap" type="com.itheima.pojo.CheckGroup">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+    </resultMap>
+    <resultMap id="findByIdResultMap"
+               type="com.itheima.pojo.CheckGroup"
+                extends="baseResultMap">
+        <collection property="checkItems"
+                    javaType="arraylist"
+                    ofType="com.itheima.pojo.CheckItem"
+                    column="id"
+                    select="com.itheima.dao.CheckItemDao.findCheckItemById">
+        </collection>
+    </resultMap>
+    <select id="findCheckGroupById" resultMap="findByIdResultMap">
+        select * from t_checkgroup where id in (select checkgroup_id from t_setmeal_checkgroup where setmeal_id = #{id})
     </select>
 </mapper>
