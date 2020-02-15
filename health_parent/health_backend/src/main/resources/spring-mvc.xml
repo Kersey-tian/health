@@ -30,7 +30,7 @@
     <dubbo:registry address="zookeeper://127.0.0.1:2181" ></dubbo:registry>
 
     <!--配置controller-->
-    <dubbo:annotation package="com.itheima.controller"></dubbo:annotation>
+    <dubbo:annotation package="com.itheima"></dubbo:annotation>
 
     <!--
         超时全局设置 10分钟
@@ -47,4 +47,5 @@
     </bean>
 
     <import resource="classpath:spring-redis.xml"></import>
+    <import resource="classpath:spring-security.xml"></import>
 </beans>

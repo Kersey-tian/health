@@ -44,7 +44,9 @@
                                     <span style="display:block;">修改密码</span>
                                 </el-dropdown-item>
                                 <el-dropdown-item divided>
-                                        <span style="display:block;">退出</span>
+                                        <span style="display:block;">
+                                            <a href="/logout.action">退出</a>
+                                        </span>
                                     </el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
@@ -170,8 +172,51 @@
                     "children":[//是否有子菜单，若没有，则为[]
                         {
                             "path": "/5-1",
-                            "title": "工作量统计",
-                            "linkUrl":"all-medical-list.html",
+                            "title": "会员统计量",
+                            "linkUrl":"report_member.html",
+                            "children":[]
+                        },
+                        {
+                            "path": "/5-2",
+                            "title": "套餐统计量",
+                            "linkUrl":"report_setmeal.html",
+                            "children":[]
+                        },
+                        {
+                            "path": "/5-3",
+                            "title": "运营数据统计",
+                            "linkUrl":"report_business.html",
+                            "children":[]
+                        }
+                    ]
+                },
+                {
+                    "path": "6",     //菜单项所对应的路由路径
+                    "title": "系统设置",     //菜单项名称
+                    "icon":"fa-users",
+                    "children":[//是否有子菜单，若没有，则为[]
+                        {
+                            "path": "/6-1",
+                            "title": "菜单管理",
+                            "linkUrl":"menu.html",
+                            "children":[]
+                        },
+                        {
+                            "path": "/6-2",
+                            "title": "权限管理",
+                            "linkUrl":"permission.html",
+                            "children":[]
+                        },
+                        {
+                            "path": "/6-3",
+                            "title": "角色管理",
+                            "linkUrl":"role.html",
+                            "children":[]
+                        },
+                        {
+                            "path": "/6-4",
+                            "title": "用户管理",
+                            "linkUrl":"user.html",
                             "children":[]
                         }
                     ]

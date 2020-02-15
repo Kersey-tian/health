@@ -81,6 +81,11 @@ public class SetmealServiceImpl implements SetmealService {
         return setmealDao.findById(id);
     }
 
+    @Override
+    public List<Map<String, Object>> findSetmealCount() {
+        return setmealDao.findSetmealCount();
+    }
+
     //生成静态页面
     public void generateMobileStaticHtml(){
         //准备模板文件中所需的数据
